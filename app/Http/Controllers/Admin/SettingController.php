@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class SettingController extends Controller
 {
+
     //api
     public function settingApi($type){
         $res = DB::table('setting') -> where([

@@ -32,7 +32,7 @@
                             <td>{{$vo -> name}}</td>
                             <td>{{$vo -> area}}</td>
                             <td>{{$vo -> guimo}}</td>
-                            <td>{{$vo -> school_name}}</td>
+                            <td>{{$vo -> schoolinfo -> schoolname}}</td>
                             <td>{{$vo -> add_user}}</td>
                             <td>{{$vo -> content}}</td>
                             <td>{{ date('Y-m-d H:i',$vo -> created_at) }}</td>

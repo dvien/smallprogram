@@ -11,6 +11,12 @@ class XiaoweihuiController extends Controller
     //
     public function index(){
         $res = DB::table('xiaoyouhui') -> paginate(15);
+        foreach($res as $k => $vo){
+            $vo -> schoolinfo =  DB::table('school') -> where([
+                'id' => $vo -> school_id
+            ]) -> first();
+        }
+
 
         return view('admin/xiaoweihui/index') -> with([
             'res' => $res
@@ -40,8 +46,22 @@ class XiaoweihuiController extends Controller
         ]);
 
         if($id_res){
-            echo 'success';
+            echo $id_res;
+        }else{
+            echo 'error';
         }
+    }
+
+    //通过校友会id 获取校友会详情
+    public function getDetailById($id){
+        $res = DB::table('xiaoyouhui') -> where([
+            'id' => $id
+        ]) -> first();
+        $res -> school_info = DB::table('school') -> where([
+            'id' => $res -> school_id
+        ]) -> first();
+
+        return response() -> json($res);
     }
 
 
@@ -52,6 +72,12 @@ class XiaoweihuiController extends Controller
             'openid' => $openid,
             'flag' => 0
         ]) -> get();
+        foreach($list_xiaoyou as $k =>$vo){
+            $list_xiaoyou[$k] -> info = DB::table('xiaoyouhui') -> where([
+                'id' => $vo -> xiaoyou_id
+            ]) -> get();
+        }
+
 
         return response() -> json($list_xiaoyou);
 

@@ -52,7 +52,7 @@
     <ul class="nav nav-sidebar">
         <li @if(Route::currentRouteName() == 'setting' )class="active" @endif ><a class="dropdown-toggle-d" id="number"   >参数管理</a>
             <ul class="dropdown-menu-new @if(Route::currentRouteName() == 'setting' ) show @endif "  >
-                <li><a href="{{url('admin/setting')}}">省市区信息</a></li>
+
                 <li><a href="{{url('admin/setting/0')}}">专业信息</a></li>
                 <li><a href="{{url('admin/setting/1')}}">行业（职业）信息</a></li>
                 <li><a href="{{url('admin/setting/2')}}">爱好标签</a></li>

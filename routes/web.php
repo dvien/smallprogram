@@ -25,6 +25,8 @@ Route::any('/settingApi/{type}', 'Admin\SettingController@settingApi');
 Route::any('/apiAddXiaoyou', 'Admin\XiaoweihuiController@apiAddXiaoyou');
 //获取校友会列表
 Route::any('/apiXiaoyouList', 'Admin\XiaoweihuiController@apiXiaoyouList');
+//通过校友灰id 获取校友会详情
+Route::any('/apiXiaoyouhuiDetail/{id}', 'Admin\XiaoweihuiController@getDetailById');
 //通过校友会id  返回通讯录
 Route::any('/apiXiaoyouDetail', 'Admin\XiaoweihuiController@apiXiaoyouDetail');
 
@@ -35,7 +37,7 @@ Route::any('/apiEditUser', 'Admin\UserController@apiEditUser');
 //添加活动
 Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
 
-
+Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
 
 
 Route::group(['as' => 'setting'], function () {

@@ -12,6 +12,7 @@ class SchoolController extends Controller
     //
     public function index(){
         $res = DB::table('school') -> paginate(15);
+        //dd($res);
         return view('admin/school/index') -> with([
             'res' => $res
         ]);

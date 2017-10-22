@@ -41,7 +41,7 @@ class IndexController extends Controller
             if($res['type'] == 1){
                 return redirect('admin/yonghu/1')->with('status', 'success');
             }
-            return redirect('admin/numberBack')->with('status', 'success');
+            return redirect('admin/setting/1')->with('status', 'success');
         }else{
             return redirect('admin/login')->with('status', 'error');
         }
