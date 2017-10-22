@@ -79,6 +79,9 @@ class UserController extends Controller
         $res -> zhuanye_info = DB::table('setting') -> where([
             'id' => $res -> zhuanye_id
         ]) -> first();
+        $res -> hangye_info = DB::table('setting') -> where([
+            'id' => $res -> hangye
+        ]);
         return response() -> json($res);
     }
 
