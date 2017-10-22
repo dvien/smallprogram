@@ -69,4 +69,17 @@ class UserController extends Controller
         }
     }
 
+    public function apiUserInfo(Request $request){
+        $res = DB::table('user') -> where([
+            'openid' => $request -> input('openid')
+        ]) -> first();
+        $res -> school_info = DB::table('school') -> where([
+            'id' => $res -> school_id
+        ]) -> first();
+        $res -> zhuanye_info = DB::table('setting') -> where([
+            'id' => $res -> zhuanye_id
+        ]) -> first();
+        return response() -> json($res);
+    }
+
 }

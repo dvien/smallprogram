@@ -34,6 +34,8 @@ Route::any('/apiSchool', 'Admin\SchoolController@apiSchool');
 Route::any('/apiAddUser', 'Admin\UserController@apiAddUser');
 //编辑名片
 Route::any('/apiEditUser', 'Admin\UserController@apiEditUser');
+//通过openid 拿到userinfo
+Route::any('/apiUserInfo', 'Admin\UserController@apiUserInfo');
 //添加活动
 Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
 
