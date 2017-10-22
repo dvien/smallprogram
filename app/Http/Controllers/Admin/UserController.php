@@ -14,7 +14,7 @@ class UserController extends Controller
         $isset = DB::table('user') -> where([
             'openid' => $request -> input('openid')
         ]) -> first();
-        if($isset){
+        if($isset->openid){
             echo 'isset';exit;
         }
 
