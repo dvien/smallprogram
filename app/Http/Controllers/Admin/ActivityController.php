@@ -9,6 +9,7 @@ class ActivityController extends Controller
 {
     //获取活动列表
     public function apiActivityList(Request $request){
+
         $openid = $request -> input('openid');
         $res_make = DB::table('activity') -> where([
             'openid' => $openid,
@@ -69,6 +70,10 @@ class ActivityController extends Controller
             'openid_yaoqing' => $request -> input('openid_yaoqing'),
 
         ]);
+    }
+
+    public function index(){
+        echo '正在开发中';
     }
 
 
