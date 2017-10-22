@@ -15,7 +15,7 @@ class UserController extends Controller
             'openid' => $request -> input('openid')
         ]) -> first();
         if($isset){
-            echo 'isset';
+            echo 'isset';exit;
         }
 
         //存储
