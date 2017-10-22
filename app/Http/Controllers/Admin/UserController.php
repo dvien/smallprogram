@@ -81,7 +81,7 @@ class UserController extends Controller
         ]) -> first();
         $res -> hangye_info = DB::table('setting') -> where([
             'id' => $res -> hangye
-        ]);
+        ]) -> first();
         return response() -> json($res);
     }
 
