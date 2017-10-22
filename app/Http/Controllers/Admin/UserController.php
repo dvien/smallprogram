@@ -62,6 +62,7 @@ class UserController extends Controller
             'address' => $request -> input('address'),
             'birthday' => $request -> input('birthday'),
             'aihao' => $request -> input('aihao'),
+            'created_at' => time(),
         ]);
         if($res){
             echo 'success';
