@@ -49,9 +49,7 @@ class IndexController extends Controller
     }
 
     public function index(Request $request){
-        if(!session('username')){
-            return redirect('admin/login');
-        }
+
         //dd(session('username'));
         return view('admin/index');
     }

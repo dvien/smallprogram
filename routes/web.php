@@ -40,14 +40,14 @@ Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
 Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
 
 
-Route::group(['as' => 'setting'], function () {
+Route::group(['as' => 'setting','middleware' => ['checklogin']], function () {
     Route::any('/admin/setting/{type}', 'Admin\SettingController@index');
 
     Route::any('/admin/addSettingRes', 'Admin\SettingController@addSettingRes');
     Route::any('/admin/deleteSetting/{id}/{type}', 'Admin\SettingController@deleteSetting');
 });
 
-Route::group(['as' => 'school'], function () {
+Route::group(['as' => 'school','middleware' => ['checklogin']], function () {
     Route::any('/admin/school', 'Admin\SchoolController@index');
     Route::any('/admin/addSchool', 'Admin\SchoolController@addSchool');
     Route::any('/admin/addSchoolRes', 'Admin\SchoolController@addSchoolRes');
@@ -56,17 +56,17 @@ Route::group(['as' => 'school'], function () {
     Route::any('/admin/deleteSchool/{id}', 'Admin\SchoolController@deleteSchool');
 });
 
-Route::group(['as' => 'xiaoweihui'], function () {
+Route::group(['as' => 'xiaoweihui','middleware' => ['checklogin']], function () {
     Route::any('/admin/xiaoweihui', 'Admin\XiaoweihuiController@index');
 
 });
 
-Route::group(['as' => 'user'], function () {
+Route::group(['as' => 'user','middleware' => ['checklogin']], function () {
     Route::any('/admin/user', 'Admin\UserController@index');
     Route::any('/admin/user/userdetail/{id}', 'Admin\UserController@userdetail');
 });
 
-Route::group(['as' => 'activity'], function () {
+Route::group(['as' => 'activity','middleware' => ['checklogin']], function () {
     Route::any('/admin/activity', 'Admin\ActivityController@index');
 });
 
