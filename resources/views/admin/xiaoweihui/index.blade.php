@@ -36,7 +36,7 @@
                             <td>{{$vo -> add_user}}</td>
                             <td>{{$vo -> content}}</td>
                             <td>{{ date('Y-m-d H:i',$vo -> created_at) }}</td>
-                            <td><a href="{{ url('admin/editSchool').'/'.$vo -> id }}">编辑 </a><a href="{{ url('admin/deleteSchool').'/'.$vo -> id }}">删除</a></td>
+                            <td></td>
                         </tr>
                     @endforeach
                 @endunless
