@@ -72,11 +72,23 @@ class XiaoweihuiController extends Controller
             'openid' => $openid,
             'flag' => 0
         ]) -> get();
+
         foreach($list_xiaoyou as $k =>$vo){
             $list_xiaoyou[$k] -> info = DB::table('xiaoyouhui') -> where([
                 'id' => $vo -> xiaoyou_id
             ]) -> get();
+            //每个里边有多少人
+            $list_xiaoyou[$k] -> number = DB::table('list') -> where([
+                'xiaoyou_id' => $vo -> xiaoyou_id
+            ]) -> count();
+            //最新活动
+            $list_xiaoyou[$k] -> new_activity = DB::table('activity') -> where([
+                'xiaoyou_id' => $vo -> xiaoyou_id
+            ]) -> orderBy('id','desc') -> first();
+
         }
+
+
 
 
         return response() -> json($list_xiaoyou);
