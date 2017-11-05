@@ -29,6 +29,7 @@ class XiaoweihuiController extends Controller
             'name' => $request -> input('name'),
             'school_id' => $request -> input('school_id'),
             'area' => $request -> input('area'),
+            'is_connect' => $request -> input('is_connect'),
             'guimo' => '',
             'content' => $request -> input('content'),
             'wx_name' => $request -> input('wx_name'),
@@ -60,6 +61,12 @@ class XiaoweihuiController extends Controller
         $res -> school_info = DB::table('school') -> where([
             'id' => $res -> school_id
         ]) -> first();
+        $res -> userinfo = DB::table('user') -> where([
+            'id' => $res -> add_user
+        ]) -> first();
+        $res -> activitys = DB::table('activity') -> where([
+            'xiaoyou_id' => $res -> id
+        ]) -> get();
 
         return response() -> json($res);
     }
@@ -85,6 +92,15 @@ class XiaoweihuiController extends Controller
             $list_xiaoyou[$k] -> new_activity = DB::table('activity') -> where([
                 'xiaoyou_id' => $vo -> xiaoyou_id
             ]) -> orderBy('id','desc') -> first();
+            if($list_xiaoyou[$k] -> new_activity){
+                //最新活动的参与人数
+                $list_xiaoyou[$k] -> new_activity_number = DB::table('baoming')
+                    -> where([
+                        'huodong_id' => $list_xiaoyou[$k] -> new_activity -> id
+                ]) -> count();
+            }
+
+
 
         }
 
@@ -146,12 +162,17 @@ class XiaoweihuiController extends Controller
             return response() -> json($newarr);
         }
 
+    }
 
-
-
-
-
-
+    //删除校友会
+    public function deleteXiaoyouhui($id){
+        $res = DB::table('xiaoyouhui') -> where([
+            'id' => $id
+        ]) -> delete();
+        DB::table('activity') -> where([
+            'xiaoyou_id' => $id
+        ]) -> delete();
+        echo 'success';
     }
 
 

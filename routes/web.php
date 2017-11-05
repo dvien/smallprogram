@@ -20,17 +20,23 @@ Route::get('/admin/index', 'Admin\IndexController@index');
 Route::get('/admin/login', 'Admin\IndexController@login');
 Route::any('/admin/loginRes', 'Admin\IndexController@loginRes');
 Route::any('/admin/loginout', 'Admin\IndexController@loginout');
-
 Route::any('/settingApi/{type}', 'Admin\SettingController@settingApi');
+
+
+//添加校友
 Route::any('/apiAddXiaoyou', 'Admin\XiaoweihuiController@apiAddXiaoyou');
 //获取校友会列表
 Route::any('/apiXiaoyouList', 'Admin\XiaoweihuiController@apiXiaoyouList');
-//通过校友灰id 获取校友会详情
+//通过校友会id 获取校友会详情
 Route::any('/apiXiaoyouhuiDetail/{id}', 'Admin\XiaoweihuiController@getDetailById');
 //通过校友会id  返回通讯录
 Route::any('/apiXiaoyouDetail', 'Admin\XiaoweihuiController@apiXiaoyouDetail');
+//删除校友会
+Route::any('/deleteXiaoyouhui/{id}', 'Admin\XiaoweihuiController@deleteXiaoyouhui');
 
+//获取学校
 Route::any('/apiSchool', 'Admin\SchoolController@apiSchool');
+//添加用户
 Route::any('/apiAddUser', 'Admin\UserController@apiAddUser');
 //编辑名片
 Route::any('/apiEditUser', 'Admin\UserController@apiEditUser');
@@ -38,8 +44,20 @@ Route::any('/apiEditUser', 'Admin\UserController@apiEditUser');
 Route::any('/apiUserInfo', 'Admin\UserController@apiUserInfo');
 //添加活动
 Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
-
+//活动列表
+Route::any('/apiActivityList', 'Admin\ActivityController@apiActivityList');
+//wxlogin
 Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
+
+
+
+
+Route::group(['as' => 'setting','middleware' => ['checklogin']], function () {
+    Route::any('/admin/setting/{type}', 'Admin\SettingController@index');
+
+    Route::any('/admin/addSettingRes', 'Admin\SettingController@addSettingRes');
+    Route::any('/admin/deleteSetting/{id}/{type}', 'Admin\SettingController@deleteSetting');
+});
 
 
 Route::group(['as' => 'setting','middleware' => ['checklogin']], function () {
