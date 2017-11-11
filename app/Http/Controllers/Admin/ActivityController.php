@@ -65,12 +65,22 @@ class ActivityController extends Controller
 
     //活动报名
     public function apiBaoming(Request $request){
+        //先查下他有没有报名
+        $isset = DB::table('baoming') -> where([
+            'huodong_id' => $request -> input('huodong_id'),
+            'openid' => $request -> input('openid'),
+        ]) -> first();
+        if(!$isset){
+            echo 'isset';exit;
+        }
         $res = DB::table('baoming') -> insert([
             'huodong_id' => $request -> input('huodong_id'),
             'openid' => $request -> input('openid'),
             'openid_yaoqing' => $request -> input('openid_yaoqing'),
-
         ]);
+        //活动报名人数+1
+        DB::table('activity') -> increment('baoming');
+        echo 'success';
     }
 
     public function index(){
