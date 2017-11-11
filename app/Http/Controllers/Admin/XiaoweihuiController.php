@@ -58,11 +58,12 @@ class XiaoweihuiController extends Controller
         $res = DB::table('xiaoyouhui') -> where([
             'id' => $id
         ]) -> first();
+
         $res -> school_info = DB::table('school') -> where([
             'id' => $res -> school_id
         ]) -> first();
         $res -> userinfo = DB::table('user') -> where([
-            'id' => $res -> add_user
+            'openid' => $res -> add_user
         ]) -> first();
         $res -> activitys = DB::table('activity') -> where([
             'xiaoyou_id' => $res -> id
