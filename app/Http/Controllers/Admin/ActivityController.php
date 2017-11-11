@@ -48,6 +48,19 @@ class ActivityController extends Controller
 
     }
 
+    //活动详情
+    public function apiActivityDetail($id){
+        $res = DB::table('activity') -> where([
+            'id' => $id
+        ]) -> first();
+        if($res){
+            return response() -> json($res);
+        }else{
+            echo 'error';
+        }
+
+    }
+
     //编辑活动
     public function apiEditActivity(Request $request){
         $res = DB::table('activity') -> where([

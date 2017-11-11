@@ -33,6 +33,10 @@ Route::any('/apiXiaoyouhuiDetail/{id}', 'Admin\XiaoweihuiController@getDetailByI
 Route::any('/apiXiaoyouDetail', 'Admin\XiaoweihuiController@apiXiaoyouDetail');
 //删除校友会
 Route::any('/deleteXiaoyouhui/{id}', 'Admin\XiaoweihuiController@deleteXiaoyouhui');
+//加入校友会
+Route::any('/apiEnterXiaoyou', 'Admin\XiaoweihuiController@apiEnterXiaoyou');
+
+
 
 //获取学校
 Route::any('/apiSchool', 'Admin\SchoolController@apiSchool');
@@ -46,8 +50,11 @@ Route::any('/apiUserInfo', 'Admin\UserController@apiUserInfo');
 Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
 //活动列表
 Route::any('/apiActivityList', 'Admin\ActivityController@apiActivityList');
+//活动详情
+Route::any('/apiActivityDetail/{id}', 'Admin\ActivityController@apiActivityDetail');
 //wxlogin
 Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
+
 
 
 

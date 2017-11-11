@@ -68,6 +68,9 @@ class XiaoweihuiController extends Controller
         $res -> activitys = DB::table('activity') -> where([
             'xiaoyou_id' => $res -> id
         ]) -> get();
+        $res -> number_xiaoyouhui = DB::table('list') -> where([
+            'xiaoyou_id' => $res -> id
+        ]) -> count();
 
 
 
@@ -188,6 +191,27 @@ class XiaoweihuiController extends Controller
             'xiaoyou_id' => $id
         ]) -> delete();
         echo 'success';
+    }
+
+    //加入校友会
+    public function apiEnterXiaoyou(Request $request){
+        //先看他是否已经加入
+        if($request -> input('openid') && $request -> input('xiaoyou_id')){
+            $isset = DB::table('list') -> where([
+                'openid' => $request -> input('openid'),
+                'xiaoyou_id' => $request -> input('xiaoyou_id'),
+            ]) -> first();
+            if($isset){
+                echo 'error';
+            }else{
+                DB::table('list') -> insert([
+                    'openid' => $request -> input('openid'),
+                    'xiaoyou_id' => $request -> input('xiaoyou_id'),
+                ]);
+            }
+        }else{
+            echo 'error';
+        }
     }
 
 
