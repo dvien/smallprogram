@@ -54,6 +54,8 @@ Route::any('/apiActivityList', 'Admin\ActivityController@apiActivityList');
 Route::any('/apiActivityDetail/{id}', 'Admin\ActivityController@apiActivityDetail');
 //wxlogin
 Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
+//活动报名
+Route::any('/apiBaoming','Admin\ActivityController@apiBaoming');
 
 
 

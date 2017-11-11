@@ -54,6 +54,9 @@ class ActivityController extends Controller
             'id' => $id
         ]) -> first();
         if($res){
+            $res -> userinfo = DB::table('user') -> where([
+                'openid' => $res -> openid
+            ]) -> first();
             return response() -> json($res);
         }else{
             echo 'error';
