@@ -74,6 +74,10 @@ class XiaoweihuiController extends Controller
 
 
     public function apiXiaoyouList(Request $request){
+        $name = '';
+        if($request -> input('keywords')){
+            $name = $request -> input('keywords');
+        }
         $openid = $request -> input('openid');
         //通过openid 查找他所属于的校友会
         $list_xiaoyou = DB::table('list') -> where([
@@ -82,9 +86,19 @@ class XiaoweihuiController extends Controller
         ]) -> get();
 
         foreach($list_xiaoyou as $k =>$vo){
-            $list_xiaoyou[$k] -> info = DB::table('xiaoyouhui') -> where([
-                'id' => $vo -> xiaoyou_id
-            ]) -> get();
+            $list_xiaoyou[$k] -> info = DB::table('xiaoyouhui') -> where(function($query) use($vo,$name){
+                $query -> where('id','=',$vo -> xiaoyou_id);
+                if($name){
+                    $query -> where('name','like','%'.$name.'%');
+                }
+            }) -> get();
+
+            //如果有搜索名称 则搜索
+            if(!$list_xiaoyou[$k] -> info){
+                unset($list_xiaoyou[$k]);
+                continue;
+            }
+
             //每个里边有多少人
             $list_xiaoyou[$k] -> number = DB::table('list') -> where([
                 'xiaoyou_id' => $vo -> xiaoyou_id
@@ -104,9 +118,6 @@ class XiaoweihuiController extends Controller
 
 
         }
-
-
-
 
         return response() -> json($list_xiaoyou);
 
