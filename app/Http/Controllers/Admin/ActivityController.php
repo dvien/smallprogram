@@ -49,14 +49,24 @@ class ActivityController extends Controller
     }
 
     //活动详情
-    public function apiActivityDetail($id){
+    public function apiActivityDetail(Request $request){
         $res = DB::table('activity') -> where([
-            'id' => $id
+            'id' => $request -> input('id')
         ]) -> first();
         if($res){
             $res -> userinfo = DB::table('user') -> where([
                 'openid' => $res -> openid
             ]) -> first();
+            //返回此人是否报名过
+            if($request -> input('openid')){
+                $temp = DB::table('baoming') -> where([
+                    'huodong_id' => $request -> input('id'),
+                    'openid' => $request -> input('openid')
+                ]) -> first();
+                if($temp){
+                    $res -> is_baoming = 1;
+                }
+            }
             return response() -> json($res);
         }else{
             echo 'error';

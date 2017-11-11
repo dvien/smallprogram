@@ -51,7 +51,7 @@ Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
 //活动列表
 Route::any('/apiActivityList', 'Admin\ActivityController@apiActivityList');
 //活动详情
-Route::any('/apiActivityDetail/{id}', 'Admin\ActivityController@apiActivityDetail');
+Route::any('/apiActivityDetail', 'Admin\ActivityController@apiActivityDetail');
 //wxlogin
 Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
 //活动报名
