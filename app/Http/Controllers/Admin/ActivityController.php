@@ -71,7 +71,6 @@ class ActivityController extends Controller
         }else{
             echo 'error';
         }
-
     }
 
     //编辑活动
@@ -88,6 +87,7 @@ class ActivityController extends Controller
             'openid' => $request -> input('openid'),
         ]);
     }
+
 
     //活动报名
     public function apiBaoming(Request $request){

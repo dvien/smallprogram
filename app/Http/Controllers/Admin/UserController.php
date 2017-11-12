@@ -72,7 +72,9 @@ class UserController extends Controller
     public function apiUserInfo(Request $request){
         $res = DB::table('user') -> where([
             'openid' => $request -> input('openid')
-        ]) -> first();
+        ]) -> orWhere([
+            'id' => $request -> input('id')
+        ]) ->  first();
         $res -> school_info = DB::table('school') -> where([
             'id' => $res -> school_id
         ]) -> first();
