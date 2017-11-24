@@ -98,6 +98,9 @@ Route::group(['as' => 'user','middleware' => ['checklogin']], function () {
 Route::group(['as' => 'activity','middleware' => ['checklogin']], function () {
     Route::any('/admin/activity', 'Admin\ActivityController@index');
 });
+Route::get('test', function () {
+    return 'TEST';
+});
 
 
 
