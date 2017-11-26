@@ -58,6 +58,8 @@ Route::any('/apiActivityDetail', 'Admin\ActivityController@apiActivityDetail');
 Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
 //活动报名
 Route::any('/apiBaoming','Admin\ActivityController@apiBaoming');
+//添加用户
+Route::any('/getOpenGid', 'Admin\UserController@getOpenGid');
 
 
 

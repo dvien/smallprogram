@@ -86,5 +86,32 @@ class UserController extends Controller
         ]) -> first();
         return response() -> json($res);
     }
+    public function getOpenGid(Request $request){
+        $appid = $request->input('appid');
+        $sessionKey = $request->input('sessionKey');
+        $encryptedData = $request->input('encryptedData');
+        $iv = $request->input('iv');
+
+        if(strlen($sessionKey) != 24){
+            return '-41001';
+        }
+        if(strlen($iv)!=24){
+            return '-41002';
+        }
+        $aesKey=base64_decode($sessionKey);
+        $aesIV=base64_decode($iv);
+        $aesCipher=base64_decode($encryptedData);
+        $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
+//        return response() -> json($result);
+        $dataObj=json_decode( $result );
+        if($dataObj == null){
+            return '-410000003';
+        }
+        if( $dataObj->watermark->appid != $appid){
+            return '-41003';
+        }
+//        $data = $result;
+        return response() -> json($result);
+    }
 
 }
