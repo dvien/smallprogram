@@ -111,6 +111,12 @@ class UserController extends Controller
         if( $dataObj->watermark->appid != $appid){
             return '-41003';
         }
+        if($dataObj->openGId){
+            $info = DB::table('xiaoyouhui')->where('wx_name', $dataObj->openGId)->get();
+            if(count($info) > 0){
+                return 'chongfu';
+            }
+        }
         if($alumniId) {
             $res = DB::table('xiaoyouhui')
                 ->where('id', $alumniId)
