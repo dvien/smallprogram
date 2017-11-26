@@ -31,6 +31,8 @@ Route::any('/apiXiaoyouList', 'Admin\XiaoweihuiController@apiXiaoyouList');
 Route::any('/apiXiaoyouhuiDetail/{id}', 'Admin\XiaoweihuiController@getDetailById');
 //通过校友会id  返回通讯录
 Route::any('/apiXiaoyouDetail', 'Admin\XiaoweihuiController@apiXiaoyouDetail');
+//通过校友会id 返回搜索列表
+Route::any('/searchXiaoyou', 'Admin\XiaoweihuiController@searchXiaoyou');
 //删除校友会
 Route::any('/deleteXiaoyouhui/{id}', 'Admin\XiaoweihuiController@deleteXiaoyouhui');
 //加入校友会
