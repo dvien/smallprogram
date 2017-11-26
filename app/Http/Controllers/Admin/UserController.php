@@ -112,11 +112,9 @@ class UserController extends Controller
             return '-41003';
         }
         if($alumniId) {
-            $res = DB::table('xiaoyouhui') -> insert([
-                'wx_name' => $dataObj->openGId
-            ])-> where([
-                'id' => $alumniId
-            ]);
+            $res = DB::table('xiaoyouhui')
+                ->where('id', $alumniId)
+                ->update(['wx_name' => $dataObj->openGId]);
         }
         return response() -> json($result);
     }
