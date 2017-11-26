@@ -94,13 +94,14 @@ class XiaoweihuiController extends Controller
         foreach($list_xiaoyou as $k =>$vo){
             $list_xiaoyou[$k] -> info = DB::table('xiaoyouhui') -> where(function($query) use($vo,$name){
                 $query -> where('id','=',$vo -> xiaoyou_id);
-                if($name){
+                if($name != ''){
                     $query -> where('name','like','%'.$name.'%');
                 }
             }) -> get();
 
+
             //如果有搜索名称 则搜索
-            if(!$list_xiaoyou[$k] -> info){
+            if(count($list_xiaoyou[$k] -> info)<=0){
                 unset($list_xiaoyou[$k]);
                 continue;
             }
