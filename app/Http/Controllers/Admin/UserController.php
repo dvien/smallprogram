@@ -91,6 +91,7 @@ class UserController extends Controller
         $sessionKey = $request->input('sessionKey');
         $encryptedData = $request->input('encryptedData');
         $iv = $request->input('iv');
+        $alumniId = $request->input('alumniId');
 
         if(strlen($sessionKey) != 24){
             return '-41001';
@@ -105,12 +106,18 @@ class UserController extends Controller
 //        return response() -> json($result);
         $dataObj=json_decode( $result );
         if($dataObj == null){
-            return '-410000003';
+            return '-41003';
         }
         if( $dataObj->watermark->appid != $appid){
             return '-41003';
         }
-//        $data = $result;
+        if($alumniId) {
+            $res = DB::table('xiaoyouhui') -> insert([
+                'wx_name' => $dataObj->openGId
+            ])-> where([
+                'id' => $alumniId
+            ]);
+        }
         return response() -> json($result);
     }
 
