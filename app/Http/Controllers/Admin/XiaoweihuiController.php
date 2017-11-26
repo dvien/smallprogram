@@ -140,7 +140,7 @@ class XiaoweihuiController extends Controller
 
         //$type 1 行业 2 专业 3 年级
         $res = DB::table('list') -> where([
-            'id' => $id
+            'xiaoyou_id' => $id
         ]) -> get();
 
         if($res){
@@ -166,7 +166,7 @@ class XiaoweihuiController extends Controller
                     //专业分类
                     case 2:
                         $id_temp = $val -> userinfo -> zhuanye_id;
-                        $key_temp = DB::table('setting') -> field('name') -> where([
+                        $key_temp = DB::table('setting') -> where([
                             'id' => $id_temp
                         ]) -> first() -> name;
                     break;
