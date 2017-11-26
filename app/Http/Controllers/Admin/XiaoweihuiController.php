@@ -185,6 +185,27 @@ class XiaoweihuiController extends Controller
         }
 
     }
+    public function searchXiaoyou(Request $request){
+        $id = $request -> input('id');
+        $keywords = $request -> input('keywords');
+        $res = DB::table('list') -> where([
+            'xiaoyou_id' => $id
+        ]) -> get();
+        if($res){
+            //得到全部的通讯录数据
+            foreach($res as $k => $vo){
+                $res[$k] -> userinfo  = DB::table('user') -> where(function($query) use($vo,$keywords){
+                    $query -> where('openid','=',$vo -> openid)
+                            -> where('name','like','%'.$keywords.'%');
+                }) -> first();
+                if(!$res[$k] -> userinfo){
+                    unset($res[$k]);
+                    continue;
+                }
+            }
+            return response() -> json($res);
+        }
+    }
 
     //删除校友会
     public function deleteXiaoyouhui($id){

@@ -29,6 +29,7 @@ class ActivityController extends Controller
             'time' => $request -> input('time'),
             'address' => $request -> input('address'),
             'openid' => $request -> input('openid'),
+            'baoming' => 1,
             'created_at' => time()
         ]);
 
