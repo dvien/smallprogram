@@ -125,8 +125,11 @@ class XiaoweihuiController extends Controller
 
 
         }
-
-        return response() -> json($list_xiaoyou);
+        $new_list = array();
+        foreach($list_xiaoyou as $k =>$vo){
+            Array_push($new_list,$vo);
+        }
+        return response() -> json($new_list);
 
     }
 
