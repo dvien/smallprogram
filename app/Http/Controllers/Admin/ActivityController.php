@@ -58,6 +58,9 @@ class ActivityController extends Controller
             $res -> userinfo = DB::table('user') -> where([
                 'openid' => $res -> openid
             ]) -> first();
+            $res -> xiaoyouinfo = DB::table('xiaoyouhui') -> where([
+                'id' => $res -> xiaoyou_id
+            ]) -> first();
             //返回此人是否报名过
             if($request -> input('openid')){
                 $temp = DB::table('baoming') -> where([
