@@ -72,7 +72,7 @@ class ActivityController extends Controller
                 }
             }
             $res -> baominguser = DB::table('baoming')
-                ->leftJoin('user', 'users.openid', '=', 'baoming.openid')
+                ->leftJoin('user', 'user.openid', '=', 'baoming.openid')
                 -> where([
                 'baoming.huodong_id' => $request -> input('id')
             ]) -> get();
