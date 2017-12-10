@@ -71,6 +71,11 @@ class ActivityController extends Controller
                     $res -> is_baoming = 1;
                 }
             }
+            $res -> baominguser = DB::table('baoming')
+                ->leftJoin('user', 'users.openid', '=', 'baoming.openid')
+                -> where([
+                'baoming.huodong_id' => $request -> input('id')
+            ]) -> get();
             return response() -> json($res);
         }else{
             echo 'error';
