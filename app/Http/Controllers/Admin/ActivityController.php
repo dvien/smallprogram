@@ -78,7 +78,7 @@ class ActivityController extends Controller
                 'baoming.huodong_id' => $request -> input('id')
             ]) -> get();
             foreach($res -> baominguser as $k =>$vo){
-                $vo -> creater_at = date('Y/m/d  H:i',$vo -> creater_at);
+                $vo -> created_at = date('Y/m/d  H:i',$vo -> created_at);
             }
             return response() -> json($res);
         }else{
