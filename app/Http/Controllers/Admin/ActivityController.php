@@ -73,9 +73,13 @@ class ActivityController extends Controller
             }
             $res -> baominguser = DB::table('baoming')
                 ->leftJoin('user', 'user.openid', '=', 'baoming.openid')
+                ->select('baoming.*', 'user.name')
                 -> where([
                 'baoming.huodong_id' => $request -> input('id')
             ]) -> get();
+            foreach($res -> baominguser as $k =>$vo){
+                $vo -> creater_at = date('Y/m/d  H:i',$vo -> creater_at);
+            }
             return response() -> json($res);
         }else{
             echo 'error';
