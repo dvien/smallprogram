@@ -15,38 +15,58 @@ class ActivityController extends Controller
         $res_make = DB::table('activity') -> where([
             'openid' => $openid,
             'flag' => 0
-        ]) -> get();
+        ])-> get();
+        $weekarray=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+        if($res_make){
+            foreach($res_make as $k =>$vo){
+                $vo -> day = date('d',strtotime($vo -> date));
+                $week = date('w',strtotime($vo -> date));
+                $vo -> week = $weekarray[$week];
+            }
+        }
         return response() -> json($res_make);
 
     }
     //添加活动
     public function apiAddActivity(Request $request){
-        $id_res = DB::table('activity') -> insertGetId([
-            'title' => $request -> input('title'),
-            'content' => $request -> input('content'),
-            'xiaoyou_id' => $request -> input('xiaoyou_id'),
-            'date' => $request -> input('date'),
-            'time' => $request -> input('time'),
-            'address' => $request -> input('address'),
-            'openid' => $request -> input('openid'),
-            'baoming' => 1,
-            'created_at' => time()
-        ]);
+        if($request -> input('id') == 0){
+            $id_res = DB::table('activity') -> insertGetId([
+                'title' => $request -> input('title'),
+                'content' => $request -> input('content'),
+                'xiaoyou_id' => $request -> input('xiaoyou_id'),
+                'date' => $request -> input('date'),
+                'time' => $request -> input('time'),
+                'address' => $request -> input('address'),
+                'openid' => $request -> input('openid'),
+                'baoming' => 1,
+                'created_at' => time()
+            ]);
 
-        //添加报名信息
-        DB::table('baoming') -> insert([
-            'huodong_id' => $id_res,
-            'openid' => $request -> input('openid'),
-            'created_at' => time()
-        ]);
+            //添加报名信息
+            DB::table('baoming') -> insert([
+                'huodong_id' => $id_res,
+                'openid' => $request -> input('openid'),
+                'created_at' => time()
+            ]);
 
 
-        if($id_res){
-            echo 'success';
+            if($id_res){
+                echo 'success';
+            }else{
+                echo 'error';
+            }
         }else{
-            echo 'error';
+            DB::table('activity')
+                ->where('id', $request -> input('id'))
+                ->update([
+                    'title' => $request -> input('title'),
+                    'content' => $request -> input('content'),
+                    'xiaoyou_id' => $request -> input('xiaoyou_id'),
+                    'date' => $request -> input('date'),
+                    'time' => $request -> input('time'),
+                    'address' => $request -> input('address'),
+                ]);
         }
-
     }
     //删除活动
     public function deleteActivity($id){
