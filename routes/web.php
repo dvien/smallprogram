@@ -52,6 +52,8 @@ Route::any('/apiUserInfo', 'Admin\UserController@apiUserInfo');
 Route::any('/apiAddActivity', 'Admin\ActivityController@apiAddActivity');
 //活动列表
 Route::any('/apiActivityList', 'Admin\ActivityController@apiActivityList');
+//删除活动
+Route::any('/deleteActivity/{id}', 'Admin\ActivityController@deleteActivity');
 //活动详情
 Route::any('/apiActivityDetail', 'Admin\ActivityController@apiActivityDetail');
 //wxlogin
