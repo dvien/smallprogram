@@ -48,7 +48,16 @@ class ActivityController extends Controller
         }
 
     }
-
+    //删除活动
+    public function deleteActivity($id){
+        DB::table('activity') -> where([
+            'id' => $id
+        ]) -> delete();
+        DB::table('baoming') -> where([
+            'huodong_id' => $id
+        ]) -> delete();
+        echo 'success';
+    }
     //活动详情
     public function apiActivityDetail(Request $request){
         $res = DB::table('activity') -> where([

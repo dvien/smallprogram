@@ -215,6 +215,9 @@ class XiaoweihuiController extends Controller
         DB::table('activity') -> where([
             'xiaoyou_id' => $id
         ]) -> delete();
+        DB::table('list') -> where([
+            'xiaoyou_id' => $id
+        ]) -> delete();
         echo 'success';
     }
 
