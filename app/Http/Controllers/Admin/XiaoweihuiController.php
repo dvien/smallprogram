@@ -98,7 +98,13 @@ class XiaoweihuiController extends Controller
                     $query -> where('name','like','%'.$name.'%');
                 }
             }) -> get();
-
+            if(count($list_xiaoyou[$k] -> info)){
+                foreach($list_xiaoyou[$k] -> info as $v =>$oo){
+                    $list_xiaoyou[$k] -> schoolinfo = DB::table('school') -> where(function($query) use($oo){
+                        $query -> where('id','=',$oo -> school_id);
+                    }) -> first();
+                }
+            }
 
             //如果有搜索名称 则搜索
             if(count($list_xiaoyou[$k] -> info)<=0){
