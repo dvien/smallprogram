@@ -61,7 +61,7 @@
         </li>
         <li @if(Route::currentRouteName() == 'school' )class="active" @endif ><a href="{{ url('admin/school') }}"   >学校管理</a>
         </li>
-        <li @if(Route::currentRouteName() == 'xiaoweihui' )class="active" @endif ><a href="{{ url('admin/xiaoweihui') }}"   >校委会管理</a>
+        <li @if(Route::currentRouteName() == 'xiaoweihui' )class="active" @endif ><a href="{{ url('admin/xiaoweihui') }}"   >校友会管理</a>
         </li>
         <li @if(Route::currentRouteName() == 'user' )class="active" @endif ><a href="{{ url('admin/user') }}"   >用户管理</a>
         </li>
