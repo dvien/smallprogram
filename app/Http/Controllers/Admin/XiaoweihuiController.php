@@ -68,13 +68,17 @@ class XiaoweihuiController extends Controller
         $res -> activitys = DB::table('activity') -> where([
             'xiaoyou_id' => $res -> id
         ]) -> get();
+        $weekarray=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
+        if(count($res -> activitys)){
+            foreach($res -> activitys as $k =>$vo){
+                $vo -> day = date('d',strtotime($vo -> date));
+                $week = date('w',strtotime($vo -> date));
+                $vo -> week = $weekarray[$week];
+            }
+        }
         $res -> number_xiaoyouhui = DB::table('list') -> where([
             'xiaoyou_id' => $res -> id
         ]) -> count();
-
-
-
-
         return response() -> json($res);
     }
 
