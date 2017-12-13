@@ -140,13 +140,14 @@ class ActivityController extends Controller
             'huodong_id' => $request -> input('huodong_id'),
             'openid' => $request -> input('openid'),
         ]) -> first();
-        if(!$isset){
+        if($isset){
             echo 'isset';exit;
         }
         $res = DB::table('baoming') -> insert([
             'huodong_id' => $request -> input('huodong_id'),
             'openid' => $request -> input('openid'),
             'openid_yaoqing' => $request -> input('openid_yaoqing'),
+            'created_at' => time(),
         ]);
         //活动报名人数+1
         DB::table('activity') -> increment('baoming');
@@ -155,7 +156,7 @@ class ActivityController extends Controller
 
     public function uploadImg(Request $request){
         if($_FILES['file']){
-            print_r($_FILES['file']) ;
+            $photos = $_FILES['file'];
         }
         echo 'fail';
     }
