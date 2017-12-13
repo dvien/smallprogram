@@ -125,5 +125,21 @@ class UserController extends Controller
         }
         return response() -> json($result);
     }
+    public function getopenID(Request $request){
+        $sessionKey = $request->input('sessionKey');
+        $encryptedData = $request->input('encryptedData');
+        $iv = $request->input('iv');
 
+        if(strlen($sessionKey) != 24){
+            return '-41001';
+        }
+        if(strlen($iv)!=24){
+            return '-41002';
+        }
+        $aesKey=base64_decode($sessionKey);
+        $aesIV=base64_decode($iv);
+        $aesCipher=base64_decode($encryptedData);
+        $result=openssl_decrypt( $aesCipher, "AES-128-CBC", $aesKey, 1, $aesIV);
+        return response() -> json($result);
+    }
 }
