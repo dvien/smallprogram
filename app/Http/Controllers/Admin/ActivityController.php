@@ -150,7 +150,7 @@ class ActivityController extends Controller
             'created_at' => time(),
         ]);
         //活动报名人数+1
-        DB::table('activity') -> increment('baoming');
+        DB::table('activity') -> increment('baoming', 1, ['id' => $request -> input('huodong_id')]);
         echo 'success';
     }
 
