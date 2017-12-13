@@ -150,9 +150,9 @@ class ActivityController extends Controller
             'created_at' => time(),
         ]);
         //活动报名人数+1
-        DB::table('activity')-> increment('baoming') -> where([
+        DB::table('activity')-> where([
             'id' => $request -> input('huodong_id'),
-        ]);
+        ])-> increment('baoming');
         echo 'success';
     }
 
