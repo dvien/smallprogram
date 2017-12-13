@@ -155,7 +155,7 @@ class ActivityController extends Controller
 
     public function uploadImg(Request $request){
         if($_FILES['file']){
-            echo $_FILES['file'];
+            print_r($_FILES['file']) ;
         }
         echo 'fail';
     }
