@@ -62,6 +62,8 @@ Route::any('/apiCheckLogin/{code}','ApiController@checkLogin');
 Route::any('/apiBaoming','Admin\ActivityController@apiBaoming');
 //添加用户
 Route::any('/getOpenGid', 'Admin\UserController@getOpenGid');
+//上传图片
+Route::any('/uploadsImg','Admin\ActivityController@uploadImg');
 
 
 

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Faker\Provider\File;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class ActivityController extends Controller
 {
@@ -151,6 +153,12 @@ class ActivityController extends Controller
         echo 'success';
     }
 
+    public function uploadImg(Request $request){
+        if($_FILES['file']){
+            echo $_FILES['file'];
+        }
+        echo 'fail';
+    }
     public function index(){
         echo '正在开发中';
     }
