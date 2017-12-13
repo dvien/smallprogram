@@ -14,10 +14,12 @@ class ActivityController extends Controller
     public function apiActivityList(Request $request){
 
         $openid = $request -> input('openid');
-        $res_make = DB::table('activity') -> where([
-            'openid' => $openid,
-            'flag' => 0
-        ])-> get();
+        $res_make = DB::table('baoming')
+            ->select('activity.*', 'baoming.id as baomingid')
+            ->leftjoin('activity','activity.id','=','baoming.huodong_id')
+            ->where(['baoming.openid'=>$openid])
+            ->orderBy('activity.date','asc')
+            ->get();
         $weekarray=array("星期日","星期一","星期二","星期三","星期四","星期五","星期六");
         if($res_make){
             foreach($res_make as $k =>$vo){
