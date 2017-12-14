@@ -81,6 +81,7 @@ class ActivityController extends Controller
                 'time' => $request -> input('time'),
                 'address' => $request -> input('address'),
                 'openid' => $request -> input('openid'),
+                'imgsrc' => $request -> input('imgsrc'),
                 'baoming' => 1,
                 'created_at' => time()
             ]);
@@ -108,6 +109,7 @@ class ActivityController extends Controller
                     'date' => $request -> input('date'),
                     'time' => $request -> input('time'),
                     'address' => $request -> input('address'),
+                    'imgsrc' => $request -> input('imgsrc'),
                 ]);
         }
     }
@@ -195,13 +197,6 @@ class ActivityController extends Controller
             'id' => $request -> input('huodong_id'),
         ])-> increment('baoming');
         echo 'success';
-    }
-
-    public function uploadImg(Request $request){
-        if($_FILES['file']){
-            $photos = $_FILES['file'];
-        }
-        echo 'fail';
     }
     public function index(){
         echo '正在开发中';
