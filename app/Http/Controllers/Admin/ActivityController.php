@@ -34,7 +34,7 @@ class ActivityController extends Controller
             file_get_contents($file->getRealPath())
         );
         */
-        $res = $rew = \Intervention\Image\Facades\Image::make(file_get_contents($file->getRealPath()))->save(public_path().'/images/'.$newFileName,100 );
+        $res = $rew = \Intervention\Image\Facades\Image::make(file_get_contents($file->getRealPath()))->save(public_path().'/images/activity/'.$newFileName,100 );
         /*
         if(!Storage::exists($savePath)){
             exit('保存文件失败！');
