@@ -66,6 +66,8 @@ Route::any('/getOpenGid', 'Admin\UserController@getOpenGid');
 Route::any('/getopenID', 'Admin\UserController@getopenID');
 //上传图片
 Route::any('/uploadsImg','Admin\ActivityController@uploadImg');
+//Richer 上传图片
+Route::any('/saveImg','Admin\ActivityController@saveImg');
 
 
 

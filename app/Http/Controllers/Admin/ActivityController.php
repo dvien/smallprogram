@@ -10,6 +10,45 @@ use Illuminate\Support\Facades\Input;
 
 class ActivityController extends Controller
 {
+    //保存图片
+    public  function saveImg(Request $request){
+        //判断请求中是否包含name=file的上传文件
+        if(!$request->hasFile('file')){
+            echo 'error';exit;
+        }
+        $imgsrc = $request -> input('imgsrc');
+        if($imgsrc){
+            $imgsrc = explode(',',$imgsrc);
+        }
+        $file = $request->file('file');
+        //判断文件上传过程中是否出错
+        if(!$file->isValid()){
+            exit('文件上传出错！');
+        }
+
+        $newFileName = md5(time().rand(0,10000)).'.'.$file->getClientOriginalExtension();
+        /*
+        $savePath = $newFileName;
+        $bytes = Storage::put(
+            $savePath,
+            file_get_contents($file->getRealPath())
+        );
+        */
+        $res = $rew = \Intervention\Image\Facades\Image::make(file_get_contents($file->getRealPath()))->save(public_path().'/images/'.$newFileName,100 );
+        /*
+        if(!Storage::exists($savePath)){
+            exit('保存文件失败！');
+        }
+        */
+        $imgsrc[] = $newFileName;
+        $returndata['imgsrc'] =  implode(',',$imgsrc);
+        $returndata['img'] = $newFileName;
+        //header("Content-Type: ".Storage::mimeType($savePath));
+        return response() -> json($returndata);
+        //echo $newFileName;
+        //echo Storage::get($savePath);
+    }
+
     //获取活动列表
     public function apiActivityList(Request $request){
 
