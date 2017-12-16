@@ -114,7 +114,7 @@ class UserController extends Controller
         }
         if($alumniId) {
             $info = DB::table('xiaoyouhui')->where('id', $alumniId)->first();
-            if($info && ($info.wx_name != '' && $info.wx_name != null)){
+            if($info && ($info->wx_name != '' && $info->wx_name != null)){
                 return 'isbuild';
             }
             $res = DB::table('xiaoyouhui')
