@@ -36,7 +36,7 @@
                             <td>@if($vo -> user_info){{$vo -> user_info -> name}}@endif</td>
                             <td>{{$vo -> baoming}}</td>
                             <td>{{ date('Y-m-d H:i',$vo -> created_at) }}</td>
-                            <td><a href="{{ url() }}">查看</a></td>
+                            <td></td>
                         </tr>
                     @endforeach
                 @endunless

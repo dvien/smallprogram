@@ -94,7 +94,7 @@ class SchoolController extends Controller
         $savedata['year'] = $request -> input('year');
         $savedata['content'] = $request -> input('content');
         $savedata['created_at'] = time();
-        
+
 
         $res = DB::table('school') -> where([
             'id' => $request -> input('id')
