@@ -222,6 +222,8 @@ class XiaoweihuiController extends Controller
         $res = DB::table('xiaoyouhui') -> where([
             'id' => $id
         ]) -> delete();
+        $activity = DB::table('activity')->where('xiaoyou_id', $id)->pluck('id');
+        DB::table('baoming') ->whereIn('huodong_id', $activity)-> delete();
         DB::table('activity') -> where([
             'xiaoyou_id' => $id
         ]) -> delete();

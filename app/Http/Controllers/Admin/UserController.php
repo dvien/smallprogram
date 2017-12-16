@@ -95,10 +95,10 @@ class UserController extends Controller
         $alumniId = $request->input('alumniId');
 
         if(strlen($sessionKey) != 24){
-            return '-41001';
+            return '-41003';
         }
         if(strlen($iv)!=24){
-            return '-41002';
+            return '-41003';
         }
         $aesKey=base64_decode($sessionKey);
         $aesIV=base64_decode($iv);
@@ -112,13 +112,11 @@ class UserController extends Controller
         if( $dataObj->watermark->appid != $appid){
             return '-41003';
         }
-        if($dataObj->openGId){
-            $info = DB::table('xiaoyouhui')->where('wx_name', $dataObj->openGId)->get();
-            if(count($info) > 0){
-                return 'chongfu';
-            }
-        }
         if($alumniId) {
+            $info = DB::table('xiaoyouhui')->where('id', $alumniId)->first();
+            if($info && ($info.wx_name != '' && $info.wx_name != null)){
+                return 'isbuild';
+            }
             $res = DB::table('xiaoyouhui')
                 ->where('id', $alumniId)
                 ->update(['wx_name' => $dataObj->openGId]);
