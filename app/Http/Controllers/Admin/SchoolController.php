@@ -77,24 +77,24 @@ class SchoolController extends Controller
         $file = $request -> file('logo');
         //$filename = '';
         if($file && $file -> isValid()){
+            dump($file);
             //如果上传成功
             $ext = $file -> getClientOriginalExtension();
             $realpath = $file  -> getRealPath();
             $filename = date('Y-m-d-H:i:s').'-'.uniqid().'.'.$ext;
             $bool = Storage::disk('uploads')->put($filename,file_get_contents($realpath));
             $savedata['logo'] = $filename;
+            dump($savedata);
         }
 
-
-        $savedata = [
-            'schoolname' => $request -> input('schoolname'),
-            'name' => $request -> input('name'),
-            'tel' => $request -> input('tel'),
-            'guanwang' => $request -> input('guanwang'),
-            'year' => $request -> input('year'),
-            'content' => $request -> input('content'),
-            'created_at' => time(),
-        ];
+        $savedata['schoolname'] = $request -> input('schoolname');
+        $savedata['name'] = $request -> input('name');
+        $savedata['tel'] = $request -> input('tel');
+        $savedata['guanwang'] = $request -> input('guanwang');
+        $savedata['year'] = $request -> input('year');
+        $savedata['content'] = $request -> input('content');
+        $savedata['created_at'] = time();
+        
 
         $res = DB::table('school') -> where([
             'id' => $request -> input('id')

@@ -199,7 +199,22 @@ class ActivityController extends Controller
         echo 'success';
     }
     public function index(){
-        echo '正在开发中';
+        $res = DB::table('activity') -> paginate(15);
+
+        foreach($res as $k => $vo){
+            $vo -> xiaoyou_info =  DB::table('xiaoyouhui') -> where([
+                'id' => $vo -> xiaoyou_id
+            ]) -> first();
+            $vo -> user_info = DB::table('user') -> where([
+                'openid' => $vo -> openid
+            ]) -> first();
+        }
+
+
+
+        return view('admin/activity/index') -> with([
+            'res' => $res
+        ]);
     }
 
 
