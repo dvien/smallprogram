@@ -15,6 +15,9 @@ class XiaoweihuiController extends Controller
             $vo -> schoolinfo =  DB::table('school') -> where([
                 'id' => $vo -> school_id
             ]) -> first();
+            $vo -> user_info = DB::table('user') -> where([
+                'openid' => $vo -> add_user
+            ]) -> first();
         }
 
 

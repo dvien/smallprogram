@@ -33,7 +33,7 @@
                             <td>{{$vo -> area}}</td>
                             <td>{{$vo -> guimo}}</td>
                             <td>@if($vo -> schoolinfo){{$vo -> schoolinfo -> schoolname}}@endif</td>
-                            <td>{{$vo -> add_user}}</td>
+                            <td>{{$vo -> user_info -> name}}</td>
                             <td>{{$vo -> content}}</td>
                             <td>{{ date('Y-m-d H:i',$vo -> created_at) }}</td>
                             <td></td>
