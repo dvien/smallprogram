@@ -76,6 +76,10 @@ class UserController extends Controller
         ]) -> orWhere([
             'id' => $request -> input('id')
         ]) ->  first();
+        if(!count($res)){
+            return response() -> json($res);
+        }
+
         if($res -> school_id){
             $res -> school_info = DB::table('school') -> where([
                 'id' => $res -> school_id
