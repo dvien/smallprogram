@@ -28,6 +28,28 @@ class XiaoweihuiController extends Controller
     }
 
     public function apiAddXiaoyou(Request $request){
+        $id = $request -> input('id');
+        if($id){
+            //如果有id 带进来 更新
+            $update_res = DB::table('xiaoyouhui') -> where([
+                'id' => trim($id)
+            ]) -> update([
+                'name' => $request -> input('name'),
+                'school_id' => $request -> input('school_id'),
+                'area' => $request -> input('area'),
+                'is_connect' => $request -> input('is_connect'),
+                'guimo' => '',
+                'content' => $request -> input('content'),
+                'wx_name' => $request -> input('wx_name')
+            ]);
+            if($update_res){
+                echo 'success';
+            }else{
+                echo 'error';
+            }
+            exit;
+
+        }
         $id_res = DB::table('xiaoyouhui') -> insertGetId([
             'name' => $request -> input('name'),
             'school_id' => $request -> input('school_id'),
