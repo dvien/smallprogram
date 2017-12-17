@@ -76,15 +76,22 @@ class UserController extends Controller
         ]) -> orWhere([
             'id' => $request -> input('id')
         ]) ->  first();
-        $res -> school_info = DB::table('school') -> where([
-            'id' => $res -> school_id
-        ]) -> first();
-        $res -> zhuanye_info = DB::table('setting') -> where([
-            'id' => $res -> zhuanye_id
-        ]) -> first();
-        $res -> hangye_info = DB::table('setting') -> where([
-            'id' => $res -> hangye
-        ]) -> first();
+        if($res -> school_id){
+            $res -> school_info = DB::table('school') -> where([
+                'id' => $res -> school_id
+            ]) -> first();
+        }
+        if($res -> zhuanye_id){
+            $res -> zhuanye_info = DB::table('setting') -> where([
+                'id' => $res -> zhuanye_id
+            ]) -> first();
+        }
+        if($res -> hangye){
+            $res -> hangye_info = DB::table('setting') -> where([
+                'id' => $res -> hangye
+            ]) -> first();
+        }
+
         return response() -> json($res);
     }
     public function getOpenGid(Request $request){
