@@ -272,6 +272,7 @@ class XiaoweihuiController extends Controller
                 DB::table('list') -> insert([
                     'openid' => $request -> input('openid'),
                     'xiaoyou_id' => $request -> input('xiaoyou_id'),
+                    'created_at' => time()
                 ]);
             }
         }else{
