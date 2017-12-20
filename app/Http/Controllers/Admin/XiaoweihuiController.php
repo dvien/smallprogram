@@ -214,6 +214,7 @@ class XiaoweihuiController extends Controller
                 //var_dump($type);exit;
 
                 $newarr[$key_temp][] = $val;
+                ksort($newarr);
             }
             //var_dump($newarr);exit;
             return response() -> json($newarr);
