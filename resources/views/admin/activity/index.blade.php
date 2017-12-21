@@ -3,11 +3,11 @@
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-lg-10 col-md-offset-2 main" id="main" style="max-height:800px;overflow: scroll;" >
 
         <h1 class="page-header">活动列表</h1>
-        <!--
+        
         <ol class="breadcrumb">
-            <li><a href="{{ url('admin/addSchool') }}">新增</a></li>
+            <li><a href="{{ url('admin/exportExcel') }}">导出活动</a></li>
         </ol>
-        -->
+        
         <h1 class="page-header">管理 <span class="badge">{{ count($res) }}</span></h1>
         <div class="table-responsive"  >
             <table class="table table-striped table-hover" >

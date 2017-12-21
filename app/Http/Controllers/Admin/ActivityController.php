@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ActivityController extends Controller
 {
@@ -215,6 +216,28 @@ class ActivityController extends Controller
         return view('admin/activity/index') -> with([
             'res' => $res
         ]);
+    }
+
+    public function exportExcel(){
+        set_time_limit(0);
+        $res_arr[] = ['活动名称','活动简介','活动地点','绑定校友会','添加人','报名人数','创建时间'];
+        $res = DB::table('activity') -> get();
+
+        foreach($res as $k => $vo){
+            $vo -> xiaoyou_info =  DB::table('xiaoyouhui') -> where([
+                'id' => $vo -> xiaoyou_id
+            ]) -> first();
+            $vo -> user_info = DB::table('user') -> where([
+                'openid' => $vo -> openid
+            ]) -> first();
+            $res_arr[] = [$vo -> title,$vo -> content,$vo->address,$vo -> xiaoyou_info -> name,$vo -> user_info -> name,$vo -> baoming,date('Y-m-d H:i',$vo -> created_at)];
+        }
+
+        Excel::create('活动'.date('Y-m-d'),function($excel) use ($res_arr){
+            $excel->sheet('activity', function($sheet) use ($res_arr){
+                $sheet->rows($res_arr);
+            });
+        })->export('xls');
     }
 
 
