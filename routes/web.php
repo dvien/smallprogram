@@ -107,6 +107,7 @@ Route::group(['as' => 'user','middleware' => ['checklogin']], function () {
 
 Route::group(['as' => 'activity','middleware' => ['checklogin']], function () {
     Route::any('/admin/activity', 'Admin\ActivityController@index');
+    Route::any('/admin/exportExcel', 'Admin\ActivityController@exportExcel');
 });
 Route::get('test', function () {
     return 'TEST';
