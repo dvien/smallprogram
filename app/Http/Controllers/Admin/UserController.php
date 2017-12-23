@@ -104,6 +104,7 @@ class UserController extends Controller
         $encryptedData = $request->input('encryptedData');
         $iv = $request->input('iv');
         $alumniId = $request->input('alumniId');
+        $openid = $request->input('openid');
 
         if(strlen($sessionKey) != 24){
             return '-41003';
@@ -124,6 +125,12 @@ class UserController extends Controller
             return '-41003';
         }
         if($alumniId) {
+            if(!$openid)  return 'openidfail';
+            $ismanage = DB::table('list')->where([
+                'xiaoyou_id' => $alumniId,
+                'openid' => $openid
+            ]) ->first();
+            if($ismanage->is_manage == 0) return 'notmanage';
             $info = DB::table('xiaoyouhui')->where('id', $alumniId)->first();
             if($info && ($info->wx_name != '' && $info->wx_name != null)){
                 return 'isbuild';
