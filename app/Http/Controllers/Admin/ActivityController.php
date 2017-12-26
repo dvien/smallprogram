@@ -240,5 +240,39 @@ class ActivityController extends Controller
         })->export('xls');
     }
 
+    //导出活动报名名单
+    public function exportPersonList($id){
+        set_time_limit(0);
+        $res_arr[] = ['姓名','电话','专业','班级'];
+
+        $openids_temp = DB::table('baoming') -> where([
+            'huodong_id' => $id
+        ])->select('openid')-> get();
+        $openids = [];
+        if($openids_temp){
+
+            foreach($openids_temp as $vo){
+                $openids[] = $vo -> openid;
+            }
+        }
+        $res_temp = DB::table('user')
+            ->leftJoin('setting', 'user.zhuanye_id', '=', 'setting.id')
+            ->whereIn('openid',$openids)
+            ->select('user.name','user.tel','setting.name as setting_name','user.banji')
+            ->get();
+        foreach($res_temp as $k => $vo){
+            $res_arr[] = [$vo -> name,$vo->tel,$vo->setting_name,$vo->banji];
+        }
+
+        Excel::create('活动报名表'.date('Y-m-d'),function($excel) use ($res_arr){
+            $excel->sheet('activity', function($sheet) use ($res_arr){
+                $sheet->rows($res_arr);
+            });
+        })->export('xls');
+
+
+        //dd($res);
+    }
+
 
 }
